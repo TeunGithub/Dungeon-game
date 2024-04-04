@@ -20,21 +20,16 @@ public class SpawnHandler : MonoBehaviour
         foreach (GameObject gameObject in SpawnCorners)
         {
             SpawnAreaCorner spawnArea = gameObject.GetComponent<SpawnAreaCorner>();
-            Debug.Log("Getting position");
-            _spawnZones.Add(new SpawnZone(spawnArea.Position, spawnArea.Width, spawnArea.Height, 5));
-
+            SpawnZone newZone = new SpawnZone(spawnArea.Position, spawnArea.Width, spawnArea.Height, spawnArea.SpawnCount);
+            newZone.SpawnEntities();
+            _spawnZones.Add(newZone);
         }
-        //World world = GameObject.Find("World").GetComponent<World>();
-        //world.Subscribe(this);
 
 
     }
     
     void Update()
     {
-        foreach (SpawnZone spawnZone in _spawnZones)
-        {
-            spawnZone.SpawnEntity();
-        }
+     
     }
 }

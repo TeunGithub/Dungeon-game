@@ -9,7 +9,7 @@ namespace Assets.Scripts.Entity
 
     public class PlayerMovementHandler
     {
-        [SerializeField] private const float BASE_SPEED = 10f;
+        [SerializeField] private const float BASE_SPEED = 5f;
         [SerializeField] private float _speed; 
         private Rigidbody2D _rb; 
 
@@ -42,10 +42,8 @@ namespace Assets.Scripts.Entity
             {
                 moveVector.x = -1;
             }
-
-            moveVector = moveVector.normalized * _speed;
         
-            _rb.velocity = moveVector * Time.deltaTime * 100;
+            _rb.velocity = moveVector.normalized * _speed;
         }
 
         /// <summary>

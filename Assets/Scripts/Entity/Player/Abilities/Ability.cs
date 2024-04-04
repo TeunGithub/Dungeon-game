@@ -21,7 +21,7 @@ namespace Assets.Scripts.Entity.Player
         }
         
         /// <summary>
-        /// Checks if ability has finished, if so; updates NotifyAbilityFinish.
+        /// Checks if ability has finished, if so; updates NotifyAbilityFinish. Use incase Ability needs to reset at end of duration
         /// </summary>
         protected void UpdateAbilityFinishNotifier()
         {

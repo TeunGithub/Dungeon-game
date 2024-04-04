@@ -6,15 +6,12 @@ using UnityEngine.Tilemaps;
 
 public class SpawnZone
 {
-    private int _maxSpawns = 1;
+    private int _maxSpawns;
     private int _spawnCount = 0;
     
     private Vector2 _position;
     private Vector2 _size;
     private List<GameObject> _entityPrefabs;
-
-    private float _nextSpawn;
-    private const float SPAWN_DELAY = 5f;
     
     // Start is called before the first frame update
     
@@ -47,18 +44,16 @@ public class SpawnZone
             );
     }
 
-    public void SpawnEntity()
+    public void SpawnEntities()
     {
-        
-        if ( _spawnCount < _maxSpawns && _entityPrefabs.Count > 0 ) 
+       
+        if (_entityPrefabs.Count > 0 ) 
         {
-            if (Time.time > _nextSpawn)
+            for (; _spawnCount < _maxSpawns; _spawnCount++)
             {
                 Vector2 rdmSpawnPoint = GetRandomPosInSpawnBounds();
                 GameObject newEnemy = GameObject.Instantiate(_entityPrefabs[0], rdmSpawnPoint, Quaternion.identity);
                 newEnemy.GetComponent<EnemyBehaviour>().SpawnPosition = rdmSpawnPoint;
-                _spawnCount++;
-                _nextSpawn = Time.time + SPAWN_DELAY;
             }
         }
 
