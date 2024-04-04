@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public delegate void EntityDied();
 public class SpawnZone
 {
     private int _maxSpawns;
@@ -12,6 +13,7 @@ public class SpawnZone
     private Vector2 _position;
     private Vector2 _size;
     private List<GameObject> _entityPrefabs;
+
     
     // Start is called before the first frame update
     
@@ -20,7 +22,7 @@ public class SpawnZone
         _position = position;
         _size = new Vector2(width, height);
         _maxSpawns = maxSpawns;
-
+        Debug.Log($"Position {position}, Size {_size}, Maxspawns {maxSpawns}");
         _entityPrefabs = new List<GameObject>();
         if (_entityPrefabs.Count == 0)
         {
@@ -53,9 +55,15 @@ public class SpawnZone
             {
                 Vector2 rdmSpawnPoint = GetRandomPosInSpawnBounds();
                 GameObject newEnemy = GameObject.Instantiate(_entityPrefabs[0], rdmSpawnPoint, Quaternion.identity);
-                newEnemy.GetComponent<EnemyBehaviour>().SpawnPosition = rdmSpawnPoint;
+                newEnemy.GetComponent<EnemyController>().SpawnPosition = rdmSpawnPoint;
+                newEnemy.GetComponent<EnemyController>().EntityGotKilled = EntityDied;
             }
         }
 
+    }
+
+    public void EntityDied()
+    {
+        _spawnCount --;
     }
 }

@@ -8,7 +8,8 @@ using UnityEngine.Tilemaps;
 public class SpawnHandler : MonoBehaviour
 {
     private List<SpawnZone> _spawnZones;
-
+    private const float SPAWN_DELAY = 10;
+    private float _spawnTimer = 0;
    
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,8 @@ public class SpawnHandler : MonoBehaviour
         foreach (GameObject gameObject in SpawnCorners)
         {
             SpawnAreaCorner spawnArea = gameObject.GetComponent<SpawnAreaCorner>();
-            SpawnZone newZone = new SpawnZone(spawnArea.Position, spawnArea.Width, spawnArea.Height, spawnArea.SpawnCount);
-            newZone.SpawnEntities();
-            _spawnZones.Add(newZone);
+            spawnArea.SpawnZone.SpawnEntities();
+            _spawnZones.Add(spawnArea.SpawnZone);
         }
 
 
@@ -30,6 +30,15 @@ public class SpawnHandler : MonoBehaviour
     
     void Update()
     {
-     
+        if(_spawnTimer > SPAWN_DELAY)
+        {
+            foreach (SpawnZone spawnZone in _spawnZones)
+            {
+                spawnZone.SpawnEntities();
+            }
+            _spawnTimer = 0;
+        }
+        _spawnTimer += Time.deltaTime;
+
     }
 }
