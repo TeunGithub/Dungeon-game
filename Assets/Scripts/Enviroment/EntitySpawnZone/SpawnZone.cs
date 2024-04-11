@@ -37,7 +37,11 @@ public class SpawnZone
 
 
     }
-       
+    
+    /// <summary>
+    /// Gets a random position within the spawn area 
+    /// </summary>
+    /// <returns></returns>
     public Vector2 GetRandomPosInSpawnBounds()
     {
         return new Vector2(
@@ -46,6 +50,9 @@ public class SpawnZone
             );
     }
 
+    /// <summary>
+    /// Spawns entities if entities can be spawned
+    /// </summary>
     public void SpawnEntities()
     {
        
@@ -62,6 +69,9 @@ public class SpawnZone
 
     }
 
+    /// <summary>
+    /// Call this when an entity from a spawn zone has died.
+    /// </summary>
     public void EntityDied()
     {
         _spawnCount --;

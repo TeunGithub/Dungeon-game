@@ -4,6 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Entity.Npc
 {
+    
     internal class EnemyMovementBehaviour : MovementBehaviour
     {
         private Vector2 _spawnPosition;
@@ -16,8 +17,6 @@ namespace Assets.Scripts.Entity.Npc
         
         private Rigidbody2D _entityTarget;
         private float _aggroRange;
-
-        private bool _previouslyTargetingEntity;
         protected override Rigidbody2D Rb { get { return _rb; } }
         protected override float MovementSpeed { get { return 3f; } }
 
@@ -29,12 +28,12 @@ namespace Assets.Scripts.Entity.Npc
             _wanderRadius = wanderRadius;
             _spawnPosition = spawnPosition;
             _moveTargetPos = GetNewWanderTarget(spawnPosition,wanderRadius);
-            Debug.Log($"Moving towards {_moveTargetPos.ToString()}");
         }
 
         public override void Update()
         {
-            if (!CheckEntityTargetInAggro(_spawnPosition, _entityTarget.position, _aggroRange)) Wander();
+            //GoToPos(_entityTarget.position);
+           if (!CheckEntityTargetInAggro(_spawnPosition, _entityTarget.position, _aggroRange)) Wander();
             
         }
 
@@ -64,5 +63,7 @@ namespace Assets.Scripts.Entity.Npc
         {
         
         }
+
+       
     }
 }
