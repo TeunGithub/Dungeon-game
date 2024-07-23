@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 {
     private PlayerMovementHandler _movementHandler;
     private AbilityHandler _abilityHandler;
+    public int Direction { get; private set; }
  
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,35 @@ public class Player : MonoBehaviour
     void Update()
     {
        
-        _movementHandler.Update();
+        Vector2 moveVec = _movementHandler.Update();
         _abilityHandler.Update();
+        SetDir(moveVec);
+    }
+
+    void SetDir(Vector2 dir)
+    {
+        if (dir.x > 0)
+        {
+            Direction = 2; // right
+            return;
+        }
+        if (dir.x < 0)
+        {
+            Direction = 4; //left
+            return;
+        }
+        if(dir.y > 0)
+        {
+            Direction = 1; //up
+            return;
+        }
+        if (dir.y < 0)
+        {
+            Direction = 3; // down
+            return;
+        }
+        Direction = 0;
+        
+        
     }
 }

@@ -22,7 +22,7 @@ namespace Assets.Scripts.Entity
 
 
         // Update is called once per frame
-        public void Update()
+        public Vector2 Update()
         {
 
             Vector2 moveVector = new Vector2();
@@ -44,6 +44,7 @@ namespace Assets.Scripts.Entity
             }
         
             _rb.velocity = moveVector.normalized * _speed;
+            return moveVector;
         }
 
         /// <summary>
