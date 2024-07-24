@@ -21,7 +21,7 @@ public class WeaponSlot : MonoBehaviour
         _defaultRotation = gameObject.transform.rotation;
     }
 
-    public void SetAttackPosition()
+    public void RotateToMouse()
     {
         Vector3 parentPosition = _parent.transform.position;
         Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);

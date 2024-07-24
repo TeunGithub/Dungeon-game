@@ -17,7 +17,7 @@ public class ItemStats
         DamageValue = damage;
         KnockbackValue = knockback;
         AttackSpeed = attackSpeed;
-        AttackCooldown = attackCooldown;
+        AttackCooldown = attackCooldown + attackDuration;
         AttackDuration = attackDuration;
     }
 
