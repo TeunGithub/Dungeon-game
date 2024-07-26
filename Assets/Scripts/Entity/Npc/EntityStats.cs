@@ -2,6 +2,7 @@
 using Assets.Scripts.Entity.Npc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,5 +30,10 @@ public class EntityStats
         {
             entity.OnEntityDied();
         }
+    }
+
+    public float GetMaxHealth()
+    {
+        return _maxHealth;
     }
 }
