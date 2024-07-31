@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace Assets.Scripts.Entity.Player.Abilities
 {
@@ -28,6 +29,11 @@ namespace Assets.Scripts.Entity.Player.Abilities
             _movementHandler = handler;
             GameObject uiIcon = Resources.Load<GameObject>("Prefabs/AbilityUI/AbilityIcon");
             uiIcon = GameObject.Instantiate(uiIcon, GameObject.Find("Canvas").transform);
+           
+            GameObject abilityIcon = uiIcon.transform.Find("Icon").gameObject;
+            abilityIcon.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("UiSprites/DodgeIcon");
+
+
             _cooldownIndicator = uiIcon.transform.Find("CooldownIndicator").GetComponent<RectTransform>();
             _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
             _indicatorIncrement =  90.0f / (CooldownPeriod + Duration) ;
