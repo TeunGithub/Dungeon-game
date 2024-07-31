@@ -59,6 +59,13 @@ namespace Assets.Scripts.Entity.Player
             }
 
         }
+
+        public float GetCooldownTime()
+        {
+            float downTime = _nextUse - Time.time;
+            if (downTime <= 0) return 0;
+            else return downTime;
+        }
         /// <summary>
         /// Updates the ability
         /// </summary>
