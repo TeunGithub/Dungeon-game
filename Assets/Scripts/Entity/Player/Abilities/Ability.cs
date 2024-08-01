@@ -15,6 +15,8 @@ namespace Assets.Scripts.Entity.Player
         private float _nextUse;
         private bool isNotified;
 
+       
+
         public Ability() 
         {
             _nextUse = 0;
@@ -23,7 +25,7 @@ namespace Assets.Scripts.Entity.Player
         /// <summary>
         /// Checks if ability has finished, if so; updates NotifyAbilityFinish. Use incase Ability needs to reset at end of duration
         /// </summary>
-        protected void UpdateAbilityFinishNotifier()
+        internal void UpdateAbilityFinishNotifier()
         {
             if (Time.time > _nextUse - CooldownPeriod)
             {
@@ -52,6 +54,7 @@ namespace Assets.Scripts.Entity.Player
             if(IsAvailable())
             {
                 _nextUse = Time.time + CooldownPeriod + Duration;
+                if(_cooldownIndicator != null) _cooldownIndicator.eulerAngles = new Vector3(0, 0, 0);
                 AbilityEffect();
                 isNotified = false;
                
@@ -59,19 +62,66 @@ namespace Assets.Scripts.Entity.Player
             }
 
         }
-
+        /// <summary>
+        /// gets the remaining time on cooldown
+        /// </summary>
+        /// <returns>time of cooldown in seconds</returns>
         public float GetCooldownTime()
         {
             float downTime = _nextUse - Time.time;
             if (downTime <= 0) return 0;
             else return downTime;
         }
+
         /// <summary>
-        /// Updates the ability
+        /// Updates ability
         /// </summary>
-        public abstract void Update();
+        /// 
+        public void Update()
+        {
+            UpdateCooldownIndicator();
+            UpdateAbilityFinishNotifier();
+            OnAbilityUpdate();
+
+        }
 
 
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------\\
+        //Gui Icon
+        private RectTransform _cooldownIndicator;
+        private float _indicatorIncrement;
+
+
+        public void SetGuiIcon(string iconPath)
+        {
+            GameObject uiIcon = Resources.Load<GameObject>("Prefabs/AbilityUI/AbilityIcon");
+            uiIcon = GameObject.Instantiate(uiIcon, GameObject.Find("Canvas").transform);
+
+            GameObject abilityIcon = uiIcon.transform.Find("Icon").gameObject;
+            abilityIcon.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(iconPath);
+
+
+            _cooldownIndicator = uiIcon.transform.Find("CooldownIndicator").GetComponent<RectTransform>();
+            _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
+            _indicatorIncrement = 90.0f / (CooldownPeriod + Duration);
+        }
+        private void UpdateCooldownIndicator()
+        {
+            if (GetCooldownTime() != 0) _cooldownIndicator.Rotate(new Vector3(_indicatorIncrement * Time.deltaTime, 0, 0));
+            else _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
+        }
+
+
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------\\
+        //Abstract methodes
+
+
+        /// <summary>
+        /// Updates method for ability effect on updates
+        /// </summary>
+        /// 
+        protected abstract void OnAbilityUpdate();
 
         /// <summary>
         /// The effect of the ability
