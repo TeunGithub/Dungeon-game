@@ -2,6 +2,7 @@ using Assets.Scripts;
 using Assets.Scripts.Entity.Npc;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -26,6 +27,7 @@ public class EnemyController : MonoBehaviour, IHostileEntity
     private MovementBehaviour _movementBehaviour;
     private EntityStats _stats;
     private HealthbarBehaviour _healthbarBehaviour;
+    [SerializeField] private Animator _animator;
 
 
 
@@ -34,6 +36,7 @@ public class EnemyController : MonoBehaviour, IHostileEntity
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _targetEntity = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         _movementBehaviour = new EnemyMovementBehaviour(_rb, SpawnPosition, _wanderRadius, _aggroRange, _targetEntity);
         _stats = new EntityStats(10, 1, 3);
@@ -84,10 +87,13 @@ public class EnemyController : MonoBehaviour, IHostileEntity
     {
         if(Time.time > _nextAttack)
         {
+            _animator.SetBool("IsAttacking", true);
             float AttackMovementSpeed = 10;
             _rb.velocity = (new Vector2(_targetEntity.position.x - _rb.position.x, _targetEntity.position.y - _rb.position.y).normalized * AttackMovementSpeed);
             _nextAttack = Time.time + _stats.AttackCooldown;
+           
         }
-     
+        else _animator.SetBool("IsAttacking", false);
+
     }
 }
