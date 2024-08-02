@@ -12,6 +12,7 @@ public class WeaponSlot : MonoBehaviour
     private GameObject _parent;
     private Vector3 _defaultPositionOffset;
     private Quaternion _defaultRotation;
+    private bool _disabledPrimaryAttack = false;
     void Start()
     {
      
@@ -39,19 +40,38 @@ public class WeaponSlot : MonoBehaviour
            
       
     }
-    public Quaternion GetRotation()
+    public GameObject GetParentObject()
     {
-        return transform.rotation;
+        return _parent;
     }
+    public Collider2D GetHitboxOfWeapon()
+    {
+        return _equippedWeapon.GetComponent<Collider2D>();
+    }
+
+    public void enablePrimaryAttack()
+    {
+        _disabledPrimaryAttack = false;
+    }
+    public void disablePrimaryAttack()
+    {
+        _disabledPrimaryAttack = true;
+    }
+    public bool PrimaryAttackDisabled()
+    {
+        return _disabledPrimaryAttack;
+    }
+  
 
     private float GetAngleToMouse(Vector3 currentPos, Vector3 mousePos)
     {
        
         return Mathf.Atan2(mousePos.y - currentPos.y, mousePos.x - currentPos.x) * Mathf.Rad2Deg;
     }
-
     public void ResetPosition()
     {
+        _equippedWeapon.transform.position = transform.position;
+        _equippedWeapon.transform.rotation = transform.rotation;
         Vector3 parentPosition = _parent.transform.position;
         transform.position = parentPosition + _defaultPositionOffset;
         transform.rotation = _defaultRotation;

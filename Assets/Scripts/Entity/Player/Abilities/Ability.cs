@@ -88,27 +88,43 @@ namespace Assets.Scripts.Entity.Player
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------\\
         //Gui Icon
+        private GameObject _uiIcon;
         private RectTransform _cooldownIndicator;
         private float _indicatorIncrement;
 
 
         public void SetGuiIcon(string iconPath)
         {
-            GameObject uiIcon = Resources.Load<GameObject>("Prefabs/AbilityUI/AbilityIcon");
-            uiIcon = GameObject.Instantiate(uiIcon, GameObject.Find("Canvas").transform);
+            GameObject uiIconPrefab = Resources.Load<GameObject>("Prefabs/AbilityUI/AbilityIcon");
+            _uiIcon = GameObject.Instantiate(uiIconPrefab, GameObject.Find("Canvas/AbilityIcons").transform);
 
-            GameObject abilityIcon = uiIcon.transform.Find("Icon").gameObject;
+            GameObject abilityIcon = _uiIcon.transform.Find("Icon").gameObject;
             abilityIcon.GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(iconPath);
 
 
-            _cooldownIndicator = uiIcon.transform.Find("CooldownIndicator").GetComponent<RectTransform>();
+            _cooldownIndicator = _uiIcon.transform.Find("CooldownIndicator").GetComponent<RectTransform>();
             _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
             _indicatorIncrement = 90.0f / (CooldownPeriod + Duration);
         }
         private void UpdateCooldownIndicator()
         {
+            if (_cooldownIndicator == null) return;
             if (GetCooldownTime() != 0) _cooldownIndicator.Rotate(new Vector3(_indicatorIncrement * Time.deltaTime, 0, 0));
             else _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
+        }
+
+        public void ShiftIconPosition(Vector2 position)
+        {
+            RectTransform rTransform = _uiIcon.GetComponent<RectTransform>();
+            rTransform.localPosition = new Vector2(rTransform.localPosition.x +position.x, rTransform.localPosition.y + position.y);
+           
+        }
+
+        public void SetIconPosition(Vector2 position)
+        {
+            RectTransform rTransform = _uiIcon.GetComponent<RectTransform>();
+            rTransform.localPosition = new Vector2(position.x, position.y);
+
         }
 
 

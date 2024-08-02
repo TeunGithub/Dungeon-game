@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
         _movementHandler = new PlayerMovementHandler(gameObject);
         _abilityHandler = new AbilityHandler();
         _abilityHandler.AddAbility(new DodgeAbility(_movementHandler, KeyCode.Space));
+        _abilityHandler.AddAbility(new SpinAbility(KeyCode.E));
     }
 
     // Update is called once per frame

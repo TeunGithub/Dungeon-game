@@ -10,6 +10,7 @@ namespace Assembly_CSharp
 {
     internal class AbilityHandler
     {
+        private const float ICON_OFFSET = 5;
         private List<Ability> abilities;
         public AbilityHandler() 
         {
@@ -23,6 +24,7 @@ namespace Assembly_CSharp
         public void AddAbility(Ability ability)
         {
             abilities.Add(ability);
+            AllignAbilityIcons();
         }
 
         /// <summary>
@@ -32,6 +34,7 @@ namespace Assembly_CSharp
         public void RemoveAbility(Ability ability)
         {
             abilities.Remove(ability);
+            AllignAbilityIcons();
         }
 
         /// <summary>
@@ -46,6 +49,21 @@ namespace Assembly_CSharp
                     ability.Use();
                 }
                 ability.Update();
+            }
+        }
+
+        private void AllignAbilityIcons()
+        {   
+            for (int i = 0; i < abilities.Count; i++)
+            {
+                Vector2 position = new Vector2(30 + (i * (60 + ICON_OFFSET)),0);
+                abilities[i].SetIconPosition(position);
+            }
+
+            float offsetToCenter = ((abilities.Count * (60 + ICON_OFFSET)) - ICON_OFFSET) / 2.0f;
+            foreach (Ability ability in abilities)
+            {
+                ability.ShiftIconPosition(new Vector2(-offsetToCenter, 0));
             }
         }
     }
