@@ -20,7 +20,7 @@ public class TestWeapon : MonoBehaviour
     {
         _parentSlot = gameObject.transform.parent.gameObject.GetComponent<WeaponSlot>();
         _hitbox = GetComponent<Collider2D>();
-        _stats = new ItemStats(2,1,1,0.2f, 1);
+        _stats = new ItemStats(2,1,1,0.2f, 0.5f);
         _attackTimer = _stats.AttackCooldown; // so first attack doesn't have a delay
         _anim = GetComponent<Animator>();
         _anim.speed = 1/_stats.AttackDuration;
