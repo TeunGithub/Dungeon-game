@@ -46,6 +46,8 @@ public class EnemyController : MonoBehaviour, IHostileEntity
 
     void Update()
     {
+        if (distanceXtoPlayer() > 20) return;
+        if (distanceYtoPlayer() > 15) return;
         if (_movementBehaviour == null) { return; }
 
         float distanceToTarget = Vector3.Distance(_rb.position, _targetEntity.position);
@@ -95,5 +97,18 @@ public class EnemyController : MonoBehaviour, IHostileEntity
         }
         else _animator.SetBool("IsAttacking", false);
 
+    }
+
+    private float distanceYtoPlayer()
+    {
+        float playerY = _targetEntity.position.y;
+        float enemyY = transform.position.y;
+        return Mathf.Abs(playerY - enemyY);
+    }
+    private float distanceXtoPlayer()
+    {
+        byte playerX = (byte)_targetEntity.position.x;
+        byte enemyX = (byte)transform.position.x;
+        return Mathf.Abs(playerX - enemyX);
     }
 }
