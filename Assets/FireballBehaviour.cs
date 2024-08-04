@@ -7,7 +7,7 @@ public class FireballBehaviour : MonoBehaviour
 {
     private Vector2 _moveDirection;
     private ItemStats _stats;
-    private const float MOVE_SPEED = 15.0f;
+    private const float MOVE_SPEED = 10.0f;
     // Start is called before the first frame update
     void Start()
     {

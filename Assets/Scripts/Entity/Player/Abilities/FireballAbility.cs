@@ -38,9 +38,11 @@ namespace Assets.Scripts.Entity.Player.Abilities
             Vector3 directionVec = GetVectorToMouse(parentPosition, mousePositionInWorld);
 
             GameObject fireballObject = GameObject.Instantiate(_fireballPrefab, _parentTransform.position, Quaternion.identity);
+     
             fireballObject.transform.position = _parentTransform.position + (directionVec * 1.5f);
+            fireballObject.transform.Rotate(Vector3.forward, GetAngleToMouse(parentPosition, mousePositionInWorld));
             fireballObject.GetComponent<FireballBehaviour>().SetMoveDirection(directionVec);
-            
+
         }
 
         protected override void NotifyAbilityFinish()
@@ -56,6 +58,12 @@ namespace Assets.Scripts.Entity.Player.Abilities
         {
             return new Vector3(mousePos.x - currentPos.x, mousePos.y - currentPos.y, 0).normalized;
         }
-     
+
+        private float GetAngleToMouse(Vector3 currentPos, Vector3 mousePos)
+        {
+
+            return Mathf.Atan2(mousePos.y - currentPos.y, mousePos.x - currentPos.x) * Mathf.Rad2Deg;
+        }
+
     }
 }
