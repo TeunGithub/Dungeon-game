@@ -16,4 +16,15 @@ public class LogicScript : MonoBehaviour
         playerScore++;
         scoretext.text = $"Exp picked up: {playerScore.ToString()}";
     }
+
+    /// <summary>
+    /// Closes the application if escape is pressed
+    /// </summary>
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }

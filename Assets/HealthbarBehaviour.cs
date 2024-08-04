@@ -22,7 +22,6 @@ public class HealthbarBehaviour
     {
         if (stats.Health <= 0) { return; }
         float healthRatio = (float)stats.Health / stats.GetMaxHealth();
-        Debug.Log(stats.GetMaxHealth() +", " + stats.Health + ", " + healthRatio);
         float barLenght = 1 - (healthRatio);
         float damageXPos = _parentTransform.position.x + ((0.5f * healthRatio));
         _damagebar.transform.localScale = new Vector3(barLenght, 1 ,1);   

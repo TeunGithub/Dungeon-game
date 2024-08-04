@@ -1,11 +1,5 @@
 using Assets.Scripts.Entity.Npc;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEditorInternal;
+
 using UnityEngine;
 
 public class TestWeapon : MonoBehaviour
@@ -40,7 +34,6 @@ public class TestWeapon : MonoBehaviour
             _attackTimer = _stats.AttackCooldown;
             if (Input.GetMouseButton(0))
             {
-                Debug.Log("attacking");
                 _attackTimer = 0;
                 _parentSlot.RotateToMouse();
                 _hitbox.enabled = true;

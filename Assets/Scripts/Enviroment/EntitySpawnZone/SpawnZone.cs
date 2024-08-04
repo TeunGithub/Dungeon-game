@@ -25,7 +25,6 @@ public class SpawnZone
         _position = position;
         _size = new Vector2(width, height);
         _maxSpawns = maxSpawns;
-        Debug.Log($"Position {position}, Size {_size}, Maxspawns {maxSpawns}");
         _entityPrefabs = new List<GameObject>();
         if (_entityPrefabs.Count == 0)
         {

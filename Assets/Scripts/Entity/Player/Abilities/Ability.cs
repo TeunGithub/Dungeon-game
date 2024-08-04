@@ -57,8 +57,6 @@ namespace Assets.Scripts.Entity.Player
                 if(_cooldownIndicator != null) _cooldownIndicator.eulerAngles = new Vector3(0, 0, 0);
                 AbilityEffect();
                 isNotified = false;
-               
-                Debug.Log("used an ability");
             }
 
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class SpawnHandler : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class SpawnHandler : MonoBehaviour
         foreach (GameObject gameObject in SpawnCorners)
         {
             SpawnAreaCorner spawnArea = gameObject.GetComponent<SpawnAreaCorner>();
-            spawnArea.SpawnZone.SpawnEntities();
-            _spawnZones.Add(spawnArea.SpawnZone);
+            SpawnZone zone = new SpawnZone(spawnArea.transform.position,
+                                           spawnArea.Width, 
+                                           spawnArea.Height * -1, 
+                                           spawnArea.SpawnCount);
+            zone.SpawnEntities();
+            _spawnZones.Add(zone);
         }
 
 
