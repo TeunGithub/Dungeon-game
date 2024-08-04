@@ -8,6 +8,9 @@ public class LogicScript : MonoBehaviour
     private int playerScore;
     [SerializeField] private Text scoretext;
 
+    /// <summary>
+    /// Adds score to GUI
+    /// </summary>
     public void AddScore()
     {
         playerScore++;

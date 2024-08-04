@@ -4,6 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Needs to be called when entitie spawned by zone has died. So zone can spawn new entitie
+/// </summary>
 public delegate void EntityDied();
 public class SpawnZone
 {

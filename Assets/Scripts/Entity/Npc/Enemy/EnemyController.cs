@@ -63,7 +63,10 @@ public class EnemyController : MonoBehaviour, IHostileEntity
        
     }
     
-    
+    /// <summary>
+    /// Gets called when entity is hit. Reduces health based on stat values.
+    /// </summary>
+    /// <param name="itemStats"></param>
     public void OnHit(ItemStats itemStats)
     {
         _rb.velocity = (new Vector2(_targetEntity.position.x - _rb.position.x, _targetEntity.position.y - _rb.position.y).normalized * -(itemStats.KnockbackValue) *10);
@@ -71,6 +74,9 @@ public class EnemyController : MonoBehaviour, IHostileEntity
         _healthbarBehaviour.UpdateHealth(_stats);
     }
 
+    /// <summary>
+    /// Spawns exp entities, calls Entitygotkilled and destroyes self
+    /// </summary>
     public void OnEntityDied()
     {
         GameObject exp = Resources.Load<GameObject>("Prefabs/Entities/Exp");
@@ -99,12 +105,21 @@ public class EnemyController : MonoBehaviour, IHostileEntity
 
     }
 
+    /// <summary>
+    /// Gets distance on Y-axis to the player
+    /// </summary>
+    /// <returns>distance to player on Y-axis</returns>
     private float distanceYtoPlayer()
     {
         float playerY = _targetEntity.position.y;
         float enemyY = transform.position.y;
         return Mathf.Abs(playerY - enemyY);
     }
+
+    /// <summary>
+    /// Gets distance on X-axis to the player
+    /// </summary>
+    /// <returns>distance to player on X-axis</returns>
     private float distanceXtoPlayer()
     {
         byte playerX = (byte)_targetEntity.position.x;

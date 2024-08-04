@@ -14,6 +14,10 @@ public class HealthbarBehaviour
         _parentTransform = parentTransform;
     }
 
+    /// <summary>
+    /// Updates the health bar so damage taken is visible
+    /// </summary>
+    /// <param name="stats">stats of the entity the healthbar has been bound to</param>
     public void UpdateHealth(EntityStats stats)
     {
         if (stats.Health <= 0) { return; }

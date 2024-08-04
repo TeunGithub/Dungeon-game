@@ -92,7 +92,10 @@ namespace Assets.Scripts.Entity.Player
         private RectTransform _cooldownIndicator;
         private float _indicatorIncrement;
 
-
+        /// <summary>
+        /// Sets the Icon of the ability on the GUI.
+        /// </summary>
+        /// <param name="iconPath">Path from Resource folder to Icon image</param>
         public void SetGuiIcon(string iconPath)
         {
             GameObject uiIconPrefab = Resources.Load<GameObject>("Prefabs/AbilityUI/AbilityIcon");
@@ -106,6 +109,10 @@ namespace Assets.Scripts.Entity.Player
             _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
             _indicatorIncrement = 90.0f / (CooldownPeriod + Duration);
         }
+
+        /// <summary>
+        /// Updates the indicator for the cooldown duration.
+        /// </summary>
         private void UpdateCooldownIndicator()
         {
             if (_cooldownIndicator == null) return;
@@ -113,6 +120,10 @@ namespace Assets.Scripts.Entity.Player
             else _cooldownIndicator.eulerAngles = new Vector3(90, 0, 0);
         }
 
+        /// <summary>
+        /// shifts the position of the icon. The shift is based on the original position of the icon.
+        /// </summary>
+        /// <param name="position">The amount that the icon needs to be shifted</param>
         public void ShiftIconPosition(Vector2 position)
         {
             RectTransform rTransform = _uiIcon.GetComponent<RectTransform>();
@@ -120,6 +131,10 @@ namespace Assets.Scripts.Entity.Player
            
         }
 
+        /// <summary>
+        /// Sets the position of the Icon.
+        /// </summary>
+        /// <param name="position">The new position of the icon</param>
         public void SetIconPosition(Vector2 position)
         {
             RectTransform rTransform = _uiIcon.GetComponent<RectTransform>();

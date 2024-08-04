@@ -57,6 +57,10 @@ public class TestWeapon : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Gets called when collision occures
+    /// </summary>
+    /// <param name="collision">The collider that collided with object</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collidingObject = collision.gameObject; 

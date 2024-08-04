@@ -52,6 +52,9 @@ namespace Assembly_CSharp
             }
         }
 
+        /// <summary>
+        /// Allignes the Icons of the abilities in the GUI so they are centered.
+        /// </summary>
         private void AllignAbilityIcons()
         {   
             for (int i = 0; i < abilities.Count; i++)

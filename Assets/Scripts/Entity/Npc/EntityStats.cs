@@ -23,6 +23,11 @@ public class EntityStats
         AttackCooldown = attackCooldown;
     }
 
+    /// <summary>
+    /// Reduces health value based on damage value
+    /// </summary>
+    /// <param name="damage">Value of the damage taken</param>
+    /// <param name="entity">Entity that takes damage</param>
     public void ReduceHealth(float damage, IHostileEntity entity)
     {
         Health -= damage;

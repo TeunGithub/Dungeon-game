@@ -22,6 +22,9 @@ public class WeaponSlot : MonoBehaviour
         _defaultRotation = gameObject.transform.rotation;
     }
 
+    /// <summary>
+    /// Rotates the entity slot towards the mouse
+    /// </summary>
     public void RotateToMouse()
     {
         Vector3 parentPosition = _parent.transform.position;
@@ -40,34 +43,64 @@ public class WeaponSlot : MonoBehaviour
            
       
     }
+
+    /// <summary>
+    /// Gets parent object
+    /// </summary>
+    /// <returns>Parent ojbect</returns>
     public GameObject GetParentObject()
     {
         return _parent;
     }
+
+    /// <summary>
+    /// Returns collider2D of eqquiped weapon
+    /// </summary>
+    /// <returns>Collider2D of weapon</returns>
     public Collider2D GetHitboxOfWeapon()
     {
         return _equippedWeapon.GetComponent<Collider2D>();
     }
 
-    public void enablePrimaryAttack()
+    /// <summary>
+    /// Enabeles the primary attack
+    /// </summary>
+    public void EnablePrimaryAttack()
     {
         _disabledPrimaryAttack = false;
     }
-    public void disablePrimaryAttack()
+
+    /// <summary>
+    /// Disables the primary attack
+    /// </summary>
+    public void DisablePrimaryAttack()
     {
         _disabledPrimaryAttack = true;
     }
+
+    /// <summary>
+    /// Checks if primary attack is enabled
+    /// </summary>
+    /// <returns>true if primary attack is enabled, false if its disabled</returns>
     public bool PrimaryAttackDisabled()
     {
         return _disabledPrimaryAttack;
     }
-  
 
+    /// <summary>
+    /// Gets the angle from the objects position to the position of the mouse
+    /// </summary>
+    /// <param name="currentPos">The position of the object</param>
+    /// <param name="mousePos">The position of the mouse in world coordinates</param>
+    /// <returns>Angle in degrees from object position to mouse position</returns>
     private float GetAngleToMouse(Vector3 currentPos, Vector3 mousePos)
     {
        
         return Mathf.Atan2(mousePos.y - currentPos.y, mousePos.x - currentPos.x) * Mathf.Rad2Deg;
     }
+    /// <summary>
+    /// Resets the position of the weaponslot to its original position
+    /// </summary>
     public void ResetPosition()
     {
         _equippedWeapon.transform.position = transform.position;

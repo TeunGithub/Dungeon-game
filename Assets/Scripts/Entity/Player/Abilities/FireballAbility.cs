@@ -54,11 +54,24 @@ namespace Assets.Scripts.Entity.Player.Abilities
         {
       
         }
+
+        /// <summary>
+        /// Gets a vector from the objects position to the position of the mouse
+        /// </summary>
+        /// <param name="currentPos">The position of the object</param>
+        /// <param name="mousePos">The position of the mouse in world coordinates</param>
+        /// <returns>Vector with value from objects position to mouse position</returns>
         private Vector3 GetVectorToMouse(Vector3 currentPos, Vector3 mousePos)
         {
             return new Vector3(mousePos.x - currentPos.x, mousePos.y - currentPos.y, 0).normalized;
         }
 
+        /// <summary>
+        /// Gets the angle from the objects position to the position of the mouse
+        /// </summary>
+        /// <param name="currentPos">The position of the object</param>
+        /// <param name="mousePos">The position of the mouse in world coordinates</param>
+        /// <returns>Angle in degrees from object position to mouse position</returns>
         private float GetAngleToMouse(Vector3 currentPos, Vector3 mousePos)
         {
 

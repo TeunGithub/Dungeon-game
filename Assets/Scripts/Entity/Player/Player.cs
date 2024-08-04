@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
         SetDir(moveVec);
     }
 
+    /// <summary>
+    /// Sets the direction the player is moving in. so right animation can be shown
+    /// </summary>
+    /// <param name="dir">Vector of the direction player is moving in</param>
     void SetDir(Vector2 dir)
     {
         if (dir.x > 0)

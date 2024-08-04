@@ -42,14 +42,14 @@ namespace Assets.Scripts.Entity.Player.Abilities
         {
             _active = true;
            _hitbox.enabled = true;
-            _weaponSlot.disablePrimaryAttack();
+            _weaponSlot.DisablePrimaryAttack();
         }
 
         protected override void NotifyAbilityFinish()
         {
             _active = false;
             _hitbox.enabled = false;
-            _weaponSlot.enablePrimaryAttack();
+            _weaponSlot.EnablePrimaryAttack();
             _weaponSlot.ResetPosition();
         }
     }

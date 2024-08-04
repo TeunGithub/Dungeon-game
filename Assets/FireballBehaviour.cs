@@ -20,11 +20,20 @@ public class FireballBehaviour : MonoBehaviour
         if (_moveDirection == Vector2.zero) return;
         transform.position += new Vector3(_moveDirection.x, _moveDirection.y) * MOVE_SPEED * Time.deltaTime;
     }
+
+    /// <summary>
+    /// Sets the direction the fireball moves in
+    /// </summary>
+    /// <param name="moveDirection">The direction in wich needs to be moved</param>
     public void SetMoveDirection(Vector2 moveDirection)
     {
         _moveDirection = moveDirection;
     }
 
+    /// <summary>
+    /// Gets called when collision occures
+    /// </summary>
+    /// <param name="collision">The collider that collided with object</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collidingObject = collision.gameObject;
